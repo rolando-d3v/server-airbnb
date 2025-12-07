@@ -1,53 +1,80 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt'
 
-import {prisma} from '../../lib/db'
+import { prisma } from '../../lib/db'
 
 
 
-
-// const pool = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
-// const prisma = new PrismaClient({ adapter: pool })
-
-
-
-
-
-// const prisma = new PrismaClient({
-//     accelerateUrl: process.env.DATABASE_URL || '',
-// });
-
-
-
-
-
+//? LOGIN APP
+//? ***********************************************************************************************/
 export const login = async (req: Request, res: Response) => {
 
-    // const xemail = req.body.email;
-    // const xpassword = req.body.password;
-
-    const authx = await prisma.user.findMany()
-
-
-    console.log(authx);
+    const { email, password } = req.body
 
 
 
-    // const pass = await bcrypt.hash(xpassword, 10)
+    const emailExiste = await prisma.user.findFirst({
+        where: { email: email }
+    })
+
+    // valida  email
+    if (!emailExiste) {
+        return res.status(404).json({
+            msg: "Error No existe email"
+        })
+    }
 
 
-   res.json({
-        email: "sfdfdf",
-        password: "sdfsdf"
-    });
+    // valida password
+    const passwordExiste = await bcrypt.compare(password, emailExiste.password)
+
+    if (!passwordExiste) {
+        return res.status(404).json({
+            msg: "Error en el Password"
+        })
+
+    }
+
+
+
+    res.json({ token: "454dfgfghfgh54fgh54fg54hf5g4hgfghfhfgdfgjdgk" })
+
 };
 
 
 
 
+//? REGISTER USER
+//? ***********************************************************************************************/
+export const register = async (req: Request, res: Response) => {
 
-export const register = (req: Request, res: Response) => {
-    res.json({ message: "register" });
+
+
+    const xemail = req.body.email;
+    const xpassword = req.body.password;
+    const xname = req.body.name;
+
+
+    const pass = await bcrypt.hash(xpassword, 10)
+
+
+
+    const createUser = await prisma.user.create(
+        {
+            data: {
+                email: xemail,
+                password: pass,
+                name: xname
+            }
+        }
+    )
+
+
+
+    res.status(201).json({
+        msg: "create success",
+        user_create: createUser
+    });
 };
 
 

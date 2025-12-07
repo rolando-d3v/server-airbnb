@@ -7,6 +7,14 @@ datasource db {
   provider = "postgresql"
 }
 
+model user {
+  id_user  Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
+  role     role[]
+}
+
 model role {
   id_role     Int    @id @default(autoincrement())
   name        String
@@ -15,13 +23,6 @@ model role {
   user        user   @relation(fields: [user_id], references: [id_user])
 }
 
-model user {
-  id_user  Int     @id @default(autoincrement())
-  email    String  @unique
-  password String
-  name     String?
-  role     role[]
-}
 
 
 

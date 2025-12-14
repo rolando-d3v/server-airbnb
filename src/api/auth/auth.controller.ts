@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt'
-
+import jwt from 'jsonwebtoken'
 import { prisma } from '../../lib/db'
 
+import {var_env} from '../../config/var_env'
 
 
 //? LOGIN APP
@@ -37,7 +38,20 @@ export const login = async (req: Request, res: Response) => {
 
 
 
-    res.json({ token: "454dfgfghfgh54fgh54fg54hf5g4hgfghfhfgdfgjdgk" })
+
+    const TK = jwt.sign(
+        {
+            id_user: emailExiste.id_user,
+
+        },
+        var_env.SECRET_JWT,
+
+        { expiresIn: "5h" }
+    )
+
+
+
+    res.json({ token: TK })
 
 };
 

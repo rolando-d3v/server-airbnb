@@ -28,26 +28,24 @@ export type AggregateRole = {
 
 export type RoleAvgAggregateOutputType = {
   id_role: number | null
-  user_id: number | null
 }
 
 export type RoleSumAggregateOutputType = {
   id_role: number | null
-  user_id: number | null
 }
 
 export type RoleMinAggregateOutputType = {
   id_role: number | null
   name: string | null
   description: string | null
-  user_id: number | null
+  user_id: string | null
 }
 
 export type RoleMaxAggregateOutputType = {
   id_role: number | null
   name: string | null
   description: string | null
-  user_id: number | null
+  user_id: string | null
 }
 
 export type RoleCountAggregateOutputType = {
@@ -61,12 +59,10 @@ export type RoleCountAggregateOutputType = {
 
 export type RoleAvgAggregateInputType = {
   id_role?: true
-  user_id?: true
 }
 
 export type RoleSumAggregateInputType = {
   id_role?: true
-  user_id?: true
 }
 
 export type RoleMinAggregateInputType = {
@@ -181,7 +177,7 @@ export type RoleGroupByOutputType = {
   id_role: number
   name: string
   description: string
-  user_id: number
+  user_id: string
   _count: RoleCountAggregateOutputType | null
   _avg: RoleAvgAggregateOutputType | null
   _sum: RoleSumAggregateOutputType | null
@@ -211,7 +207,7 @@ export type roleWhereInput = {
   id_role?: Prisma.IntFilter<"role"> | number
   name?: Prisma.StringFilter<"role"> | string
   description?: Prisma.StringFilter<"role"> | string
-  user_id?: Prisma.IntFilter<"role"> | number
+  user_id?: Prisma.UuidFilter<"role"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
 }
 
@@ -230,7 +226,7 @@ export type roleWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.roleWhereInput | Prisma.roleWhereInput[]
   name?: Prisma.StringFilter<"role"> | string
   description?: Prisma.StringFilter<"role"> | string
-  user_id?: Prisma.IntFilter<"role"> | number
+  user_id?: Prisma.UuidFilter<"role"> | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
 }, "id_role">
 
@@ -253,7 +249,7 @@ export type roleScalarWhereWithAggregatesInput = {
   id_role?: Prisma.IntWithAggregatesFilter<"role"> | number
   name?: Prisma.StringWithAggregatesFilter<"role"> | string
   description?: Prisma.StringWithAggregatesFilter<"role"> | string
-  user_id?: Prisma.IntWithAggregatesFilter<"role"> | number
+  user_id?: Prisma.UuidWithAggregatesFilter<"role"> | string
 }
 
 export type roleCreateInput = {
@@ -266,7 +262,7 @@ export type roleUncheckedCreateInput = {
   id_role?: number
   name: string
   description: string
-  user_id: number
+  user_id: string
 }
 
 export type roleUpdateInput = {
@@ -279,14 +275,14 @@ export type roleUncheckedUpdateInput = {
   id_role?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type roleCreateManyInput = {
   id_role?: number
   name: string
   description: string
-  user_id: number
+  user_id: string
 }
 
 export type roleUpdateManyMutationInput = {
@@ -298,7 +294,7 @@ export type roleUncheckedUpdateManyInput = {
   id_role?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  user_id?: Prisma.IntFieldUpdateOperationsInput | number
+  user_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type RoleListRelationFilter = {
@@ -320,7 +316,6 @@ export type roleCountOrderByAggregateInput = {
 
 export type roleAvgOrderByAggregateInput = {
   id_role?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
 }
 
 export type roleMaxOrderByAggregateInput = {
@@ -339,7 +334,6 @@ export type roleMinOrderByAggregateInput = {
 
 export type roleSumOrderByAggregateInput = {
   id_role?: Prisma.SortOrder
-  user_id?: Prisma.SortOrder
 }
 
 export type roleCreateNestedManyWithoutUserInput = {
@@ -382,6 +376,14 @@ export type roleUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.roleUpdateWithWhereUniqueWithoutUserInput | Prisma.roleUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.roleUpdateManyWithWhereWithoutUserInput | Prisma.roleUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.roleScalarWhereInput | Prisma.roleScalarWhereInput[]
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type roleCreateWithoutUserInput = {
@@ -428,7 +430,7 @@ export type roleScalarWhereInput = {
   id_role?: Prisma.IntFilter<"role"> | number
   name?: Prisma.StringFilter<"role"> | string
   description?: Prisma.StringFilter<"role"> | string
-  user_id?: Prisma.IntFilter<"role"> | number
+  user_id?: Prisma.UuidFilter<"role"> | string
 }
 
 export type roleCreateManyUserInput = {
@@ -507,7 +509,7 @@ export type $rolePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id_role: number
     name: string
     description: string
-    user_id: number
+    user_id: string
   }, ExtArgs["result"]["role"]>
   composites: {}
 }
@@ -935,7 +937,7 @@ export interface roleFieldRefs {
   readonly id_role: Prisma.FieldRef<"role", 'Int'>
   readonly name: Prisma.FieldRef<"role", 'String'>
   readonly description: Prisma.FieldRef<"role", 'String'>
-  readonly user_id: Prisma.FieldRef<"role", 'Int'>
+  readonly user_id: Prisma.FieldRef<"role", 'String'>
 }
     
 

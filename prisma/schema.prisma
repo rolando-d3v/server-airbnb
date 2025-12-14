@@ -8,7 +8,7 @@ datasource db {
 }
 
 model user {
-  id_user  Int     @id @default(autoincrement())
+  id_user  String  @id(map: "user_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   email    String  @unique
   password String
   name     String?
@@ -19,12 +19,9 @@ model role {
   id_role     Int    @id @default(autoincrement())
   name        String
   description String
-  user_id     Int
+  user_id     String @db.Uuid
   user        user   @relation(fields: [user_id], references: [id_user])
 }
-
-
-
 
 // model propiedades {
 //   id_propiedad Int    @id @default(autoincrement())

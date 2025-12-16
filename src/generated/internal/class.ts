@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.0.1",
   "engineVersion": "f09f2815f091dbba658cdcd2264306d88bb5bda6",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel user {\n  id_user  String  @id(map: \"user_pkey\") @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email    String  @unique\n  password String\n  name     String?\n  role     role[]\n}\n\nmodel role {\n  id_role     Int    @id @default(autoincrement())\n  name        String\n  description String\n  user_id     String @db.Uuid\n  user        user   @relation(fields: [user_id], references: [id_user])\n}\n\n// model propiedades {\n//   id_propiedad Int    @id @default(autoincrement())\n\n// }\n\n// model images {\n//   id_image    Int    @id @default(autoincrement())\n\n// }\n\n// model reservas {\n//   id_reserva  Int    @id @default(autoincrement())\n\n// }\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel user {\n  id_user  String  @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  email    String  @unique\n  password String\n  name     String?\n  role     role[]\n}\n\nmodel role {\n  id_role     Int    @id @default(autoincrement())\n  name        String\n  description String\n  user_id     String @db.Uuid\n  user        user   @relation(fields: [user_id], references: [id_user])\n}\n\nmodel renta {\n  id_renta    Int       @id @default(autoincrement())\n  name        String?   @db.VarChar(255)\n  description String?\n  precio      Decimal?  @default(0.00) @db.Decimal(10, 2)\n  img         String?   @db.VarChar(255)\n  estado      Boolean?  @default(true)\n  create_at   DateTime? @default(now()) @db.Timestamp(6)\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id_user\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"role\",\"relationName\":\"roleTouser\"}],\"dbName\":null},\"role\":{\"fields\":[{\"name\":\"id_role\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"roleTouser\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id_user\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"object\",\"type\":\"role\",\"relationName\":\"roleTouser\"}],\"dbName\":null},\"role\":{\"fields\":[{\"name\":\"id_role\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"roleTouser\"}],\"dbName\":null},\"renta\":{\"fields\":[{\"name\":\"id_renta\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"precio\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"img\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"estado\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"create_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -193,6 +193,16 @@ export interface PrismaClient<
     * ```
     */
   get role(): Prisma.roleDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.renta`: Exposes CRUD operations for the **renta** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Rentas
+    * const rentas = await prisma.renta.findMany()
+    * ```
+    */
+  get renta(): Prisma.rentaDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

@@ -52,7 +52,8 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   user: 'user',
-  role: 'role'
+  role: 'role',
+  renta: 'renta'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -89,6 +90,19 @@ export const RoleScalarFieldEnum = {
 } as const
 
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const RentaScalarFieldEnum = {
+  id_renta: 'id_renta',
+  name: 'name',
+  description: 'description',
+  precio: 'precio',
+  img: 'img',
+  estado: 'estado',
+  create_at: 'create_at'
+} as const
+
+export type RentaScalarFieldEnum = (typeof RentaScalarFieldEnum)[keyof typeof RentaScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -6,6 +6,7 @@ import { var_env } from "./config/var_env";
 // routes
 import authRoutes from './api/auth/auth.routes';
 import userRoutes from './api/user/user.routes';
+import rentaRoutes from './api/renta/renta.routes';
 
 
 const app = express();
@@ -32,4 +33,5 @@ app.use(express.urlencoded({ extended: false }));
 // endpoints
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/renta", rentaRoutes);
 

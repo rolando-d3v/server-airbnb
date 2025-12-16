@@ -385,7 +385,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   user: 'user',
-  role: 'role'
+  role: 'role',
+  renta: 'renta'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +402,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "role"
+    modelProps: "user" | "role" | "renta"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +554,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    renta: {
+      payload: Prisma.$rentaPayload<ExtArgs>
+      fields: Prisma.rentaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.rentaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.rentaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        findFirst: {
+          args: Prisma.rentaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.rentaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        findMany: {
+          args: Prisma.rentaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>[]
+        }
+        create: {
+          args: Prisma.rentaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        createMany: {
+          args: Prisma.rentaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.rentaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>[]
+        }
+        delete: {
+          args: Prisma.rentaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        update: {
+          args: Prisma.rentaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        deleteMany: {
+          args: Prisma.rentaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.rentaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.rentaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>[]
+        }
+        upsert: {
+          args: Prisma.rentaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$rentaPayload>
+        }
+        aggregate: {
+          args: Prisma.RentaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRenta>
+        }
+        groupBy: {
+          args: Prisma.rentaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.rentaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RentaCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -612,6 +687,19 @@ export const RoleScalarFieldEnum = {
 export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
 
 
+export const RentaScalarFieldEnum = {
+  id_renta: 'id_renta',
+  name: 'name',
+  description: 'description',
+  precio: 'precio',
+  img: 'img',
+  estado: 'estado',
+  create_at: 'create_at'
+} as const
+
+export type RentaScalarFieldEnum = (typeof RentaScalarFieldEnum)[keyof typeof RentaScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -667,6 +755,41 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal'
+ */
+export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+/**
+ * Reference to a field of type 'Decimal[]'
+ */
+export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime'
+ */
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+/**
+ * Reference to a field of type 'DateTime[]'
+ */
+export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -764,6 +887,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.userOmit
   role?: Prisma.roleOmit
+  renta?: Prisma.rentaOmit
 }
 
 /* Types for Logging */

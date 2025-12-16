@@ -47,3 +47,8 @@ export type user = Prisma.userModel
  * 
  */
 export type role = Prisma.roleModel
+/**
+ * Model renta
+ * 
+ */
+export type renta = Prisma.rentaModel

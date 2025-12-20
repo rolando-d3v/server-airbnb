@@ -16,3 +16,9 @@ CREATE TABLE renta (
     estado boolean DEFAULT true,
     create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+
+
+
+SELECT * FROM "user" WHERE  "user".email = 'rahemza20@gmail.com';
+
